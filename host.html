@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StayBuddy - Host Portal</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-light">
+
+  <!-- Host Top Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top shadow-sm">
+    <div class="container-fluid px-lg-5">
+      <a class="navbar-brand d-flex align-items-center gap-2 site-logo-container" href="host.html">
+        <img src="" alt="StayBuddy" class="site-logo-img d-none" style="max-height: 40px; max-width: 180px; object-fit: contain;">
+        <i class="bi bi-house-heart-fill text-primary fs-3 site-logo-fallback-icon"></i>
+        <span class="fw-bold fs-4 site-name text-dark">StayBuddy Host</span>
+      </a>
+
+      <div class="d-flex align-items-center gap-3 ms-auto">
+        <div class="dropdown">
+          <button class="btn btn-light d-flex align-items-center gap-2 border rounded-pill px-3 py-1 dropdown-toggle" data-bs-toggle="dropdown">
+            <div class="host-avatar-container"></div>
+            <span class="host-display-name fw-bold small text-dark">Host</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow">
+            <li><a class="dropdown-item text-danger fw-bold" onclick="logoutUser()" href="#"><i class="bi bi-box-arrow-right me-2"></i> Log Out</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Host App Main Layout -->
+  <div class="container-fluid px-lg-5 py-4">
+    <div class="row g-4">
+      
+      <!-- Host Sidebar Menu -->
+      <div class="col-lg-3">
+        <div class="card border-0 shadow-sm p-3 rounded-4 sticky-top" style="top: 80px; z-index: 10;">
+          <div class="d-flex align-items-center gap-3 p-2 mb-3 bg-light rounded-3">
+            <div class="host-avatar-container"></div>
+            <div>
+              <h6 class="fw-bold mb-0 host-display-name">Host Name</h6>
+              <span class="badge bg-primary"><i class="bi bi-patch-check-fill"></i> Verified Host</span>
+            </div>
+          </div>
+
+          <div class="nav flex-column nav-pills gap-1">
+            <a class="nav-link host-nav-link active" data-section="dashboard" href="#dashboard"><i class="bi bi-speedometer2 me-2"></i> Host Dashboard</a>
+            <a class="nav-link host-nav-link" data-section="addStay" href="#addStay"><i class="bi bi-plus-circle-fill me-2"></i> Add New Stay</a>
+            <a class="nav-link host-nav-link" data-section="myStays" href="#myStays"><i class="bi bi-house-door-fill me-2"></i> My Stays</a>
+            <a class="nav-link host-nav-link" data-section="requests" href="#requests"><i class="bi bi-inbox-fill me-2"></i> Stay Requests</a>
+            <a class="nav-link host-nav-link" data-section="guests" href="#guests"><i class="bi bi-people-fill me-2"></i> Current Guests</a>
+            <a class="nav-link host-nav-link" data-section="reviews" href="#reviews"><i class="bi bi-star-fill me-2"></i> Host Reviews</a>
+            <a class="nav-link host-nav-link d-flex align-items-center justify-content-between" data-section="notifications" href="#notifications"><span><i class="bi bi-bell-fill me-2"></i> Notifications</span> <span id="hostNotifBadge" class="badge bg-danger rounded-pill d-none">0</span></a>
+            <a class="nav-link host-nav-link" data-section="profile" href="#profile"><i class="bi bi-person-circle me-2"></i> Host Profile</a>
+          </div>
+
+          <hr class="my-3">
+          <button onclick="switchUserMode('GUEST')" class="btn btn-outline-secondary btn-sm w-100 fw-bold"><i class="bi bi-person-badge me-1"></i> Switch to Guest Mode</button>
+        </div>
+      </div>
+
+      <!-- Host Content Area -->
+      <div class="col-lg-9">
+        
+        <!-- SECTION 1: Host Dashboard -->
+        <div id="host-section-dashboard" class="host-section">
+          <div class="card bg-dark text-white p-4 border-0 rounded-4 shadow-sm mb-4">
+            <h3 class="fw-bold mb-1">Welcome to Host Portal, <span class="host-display-name">Host</span>!</h3>
+            <p class="mb-0 text-muted">Manage your budget stay listings, review incoming requests, track guest check-ins, and inspect activity logs.</p>
+          </div>
+
+          <!-- Quick Stats Row -->
+          <div class="row g-3 mb-4">
+            <div class="col-md-3">
+              <div class="card p-3 border-0 shadow-sm text-center">
+                <small class="text-uppercase fw-bold text-muted">My Listed Stays</small>
+                <h2 id="hostStatStays" class="fw-extrabold text-primary mb-0">0</h2>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card p-3 border-0 shadow-sm text-center">
+                <small class="text-uppercase fw-bold text-muted">Approved Requests</small>
+                <h2 id="hostStatApproved" class="fw-extrabold text-success mb-0">0</h2>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card p-3 border-0 shadow-sm text-center">
+                <small class="text-uppercase fw-bold text-muted">Active Guests</small>
+                <h2 id="hostStatGuests" class="fw-extrabold text-info mb-0">0</h2>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card p-3 border-0 shadow-sm text-center">
+                <small class="text-uppercase fw-bold text-muted">Guest Reviews</small>
+                <h2 id="hostStatReviews" class="fw-extrabold text-warning mb-0">0</h2>
+              </div>
+            </div>
+          </div>
+
+          <!-- Incoming Guest Stay Requests Section -->
+          <div class="card border-0 shadow-sm p-4 rounded-4 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="fw-bold mb-0"><i class="bi bi-inbox-fill text-warning me-2"></i> Incoming Pending Guest Stay Requests</h5>
+              <button onclick="switchHostSection('requests')" class="btn btn-sm btn-outline-warning fw-bold">View All Requests</button>
+            </div>
+            <div id="hostDashboardPendingRequests">
+              <p class="text-muted mb-0">Loading pending stay requests...</p>
+            </div>
+          </div>
+
+          <!-- Approved Requests & Bookings Table -->
+          <div class="card border-0 shadow-sm p-4 rounded-4 mb-4">
+            <h5 class="fw-bold mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i> Approved Stay Requests & Active Bookings</h5>
+            <div class="table-responsive">
+              <table class="table align-middle">
+                <thead>
+                  <tr>
+                    <th>Stay Title</th>
+                    <th>Guest Details</th>
+                    <th>Dates</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="hostApprovedBookingsTable">
+                  <tr><td colspan="5" class="text-center text-muted">Loading approved bookings...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Host Activity Logs & Feed -->
+          <div class="card border-0 shadow-sm p-4 rounded-4">
+            <h5 class="fw-bold mb-3"><i class="bi bi-clock-history text-primary me-2"></i> Recent Host Activity & Request Logs</h5>
+            <div id="hostActivityLogsContainer">
+              <p class="text-muted mb-0">Loading activity logs...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: Add Stay -->
+        <div id="host-section-addStay" class="host-section d-none">
+          <div class="card border-0 shadow-sm p-4 rounded-4">
+            <h4 class="fw-bold mb-3"><i class="bi bi-plus-circle-fill text-primary me-2"></i> Create New Stay Listing</h4>
+            
+            <form id="addStayForm">
+              <div class="row g-3">
+                <div class="col-md-8">
+                  <label class="form-label fw-semibold">Listing Title</label>
+                  <input type="text" id="stayTitle" class="form-control" placeholder="e.g. Sunny Private Room near Tech Hub" required>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label fw-semibold">Room Type</label>
+                  <select id="stayRoomType" class="form-select" required>
+                    <option value="Private Room">Private Room</option>
+                    <option value="Shared Room">Shared Room</option>
+                    <option value="Entire Flat">Entire Flat</option>
+                  </select>
+                </div>
+
+                <div class="col-md-4">
+                  <label class="form-label fw-semibold">City</label>
+                  <input type="text" id="stayCity" class="form-control" placeholder="Bengaluru" required>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label fw-semibold">Area / Locality</label>
+                  <input type="text" id="stayArea" class="form-control" placeholder="Indiranagar" required>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label fw-semibold">Price per Day (₹)</label>
+                  <input type="number" id="stayPrice" class="form-control" placeholder="350" required>
+                  <small class="text-muted fs-7">Informational price only. Settled peer-to-peer.</small>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label fw-semibold">Select Amenities Included</label>
+                  <div class="d-flex flex-wrap gap-3 p-3 bg-light rounded border">
+                    <div class="form-check">
+                      <input class="form-check-input stay-amenity-check" type="checkbox" value="WiFi" id="am1" checked>
+                      <label class="form-check-label" for="am1">High-Speed WiFi</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input stay-amenity-check" type="checkbox" value="AC" id="am2">
+                      <label class="form-check-label" for="am2">Air Conditioner</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input stay-amenity-check" type="checkbox" value="Study Desk" id="am3" checked>
+                      <label class="form-check-label" for="am3">Study Desk</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input stay-amenity-check" type="checkbox" value="Kitchen Access" id="am4" checked>
+                      <label class="form-check-label" for="am4">Kitchen Access</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input stay-amenity-check" type="checkbox" value="Washing Machine" id="am5">
+                      <label class="form-check-label" for="am5">Washing Machine</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label fw-semibold">House Rules</label>
+                  <textarea id="stayRules" class="form-control" rows="2" placeholder="e.g. Non-smoking inside room. Quiet hours after 10 PM."></textarea>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label fw-semibold">Detailed Description</label>
+                  <textarea id="stayDescription" class="form-control" rows="3" placeholder="Describe the vibe, proximity to metro/colleges, etc." required></textarea>
+                </div>
+
+                <div class="col-12 mt-4">
+                  <button type="submit" class="btn btn-primary btn-lg fw-bold px-5">Publish Stay Listing</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- SECTION 3: My Stays -->
+        <div id="host-section-myStays" class="host-section d-none">
+          <div class="card border-0 shadow-sm p-4 rounded-4 mb-4">
+            <h4 class="fw-bold mb-3"><i class="bi bi-house-door-fill text-primary me-2"></i> Listed Stays</h4>
+            <div class="row" id="hostStaysContainer"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: Stay Requests -->
+        <div id="host-section-requests" class="host-section d-none">
+          <div class="card border-0 shadow-sm p-4 rounded-4">
+            <h4 class="fw-bold mb-3"><i class="bi bi-inbox-fill text-primary me-2"></i> Incoming Guest Stay Requests</h4>
+            <div id="hostRequestsContainer"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 5: Current Guests -->
+        <div id="host-section-guests" class="host-section d-none">
+          <div class="card border-0 shadow-sm p-4 rounded-4">
+            <h4 class="fw-bold mb-3"><i class="bi bi-people-fill text-primary me-2"></i> Current & Confirmed Guests</h4>
+            <div id="hostGuestsContainer"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 6: Reviews -->
+        <div id="host-section-reviews" class="host-section d-none">
+          <div class="card border-0 shadow-sm p-4 rounded-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="fw-bold mb-0"><i class="bi bi-star-fill text-warning me-2"></i> Host Reviews & Guest Feedback</h4>
+              <button onclick="openHostAddReviewModal()" class="btn btn-sm btn-warning fw-bold">
+                <i class="bi bi-pencil-square me-1"></i> Add Guest Review
+              </button>
+            </div>
+            <div id="hostReviewsContainer"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 7: Host Notifications -->
+        <div id="host-section-notifications" class="host-section d-none">
+          <div class="card border-0 shadow-sm p-4 rounded-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="fw-bold mb-0"><i class="bi bi-bell-fill text-primary me-2"></i> Host Notifications & Alerts</h4>
+              <button onclick="markHostNotificationsRead()" class="btn btn-sm btn-outline-secondary fw-bold">
+                <i class="bi bi-check-all me-1"></i> Mark All as Read
+              </button>
+            </div>
+            <div id="hostNotificationsContainer">
+              <p class="text-muted">Loading host notifications...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 8: Host Profile & Security -->
+        <div id="host-section-profile" class="host-section d-none">
+          <div class="card border-0 shadow-sm p-4 rounded-4">
+            <h4 class="fw-bold mb-3"><i class="bi bi-person-circle text-primary me-2"></i> Host Profile & Security Settings</h4>
+            
+            <div class="d-flex align-items-center gap-4 mb-4 pb-3 border-bottom">
+              <div class="host-avatar-container"></div>
+              <div>
+                <h5 class="fw-bold mb-0 host-display-name">Host Name</h5>
+                <span class="badge bg-primary"><i class="bi bi-patch-check-fill"></i> Verified Host</span>
+              </div>
+            </div>
+
+            <form id="hostProfileForm">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label fw-bold">Full Name</label>
+                  <input type="text" id="editHostName" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-bold">Email Address</label>
+                  <input type="email" id="editHostEmail" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label fw-bold">Phone Number</label>
+                  <input type="tel" id="editHostPhone" class="form-control" placeholder="+91 98765 43210" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-bold">City</label>
+                  <input type="text" id="editHostCity" class="form-control" placeholder="Bengaluru, Delhi..." required>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label fw-bold">Full Address / Property Locality</label>
+                  <input type="text" id="editHostAddress" class="form-control" placeholder="House/Flat No, Street, Locality" required>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label fw-bold">Host Bio & Hosting Vibe</label>
+                  <textarea id="editHostBio" class="form-control" rows="2" placeholder="Tell guests about your stays..."></textarea>
+                </div>
+
+                <hr class="my-4">
+                <h5 class="fw-bold text-dark mb-3"><i class="bi bi-key-fill text-warning me-2"></i> Security & Password Settings</h5>
+
+                <div class="col-md-6">
+                  <label class="form-label fw-bold">New Password (leave blank to keep current)</label>
+                  <input type="password" id="editHostPassword" class="form-control" placeholder="Minimum 6 characters">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-bold">Confirm New Password</label>
+                  <input type="password" id="editHostConfirmPassword" class="form-control" placeholder="Re-type new password">
+                </div>
+
+                <div class="col-12 mt-4">
+                  <button type="submit" class="btn btn-primary fw-bold px-4 py-2 rounded-3">
+                    <i class="bi bi-save-fill me-1"></i> Save Host Profile & Security Settings
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script src="assets/js/firebase.js"></script>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/host.js"></script>
+</body>
+</html>

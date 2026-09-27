@@ -1,0 +1,84 @@
+{
+  "rules": {
+    "users": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "hosts": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "stays": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "stayRequests": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "bookings": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "conversations": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "messages": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "friendRequests": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "matches": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "reviews": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "reports": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "blocks": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "notifications": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "sosAlerts": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "content": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "settings": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "featureFlags": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "menuVisibility": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "matchingWeights": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "adminLogs": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}

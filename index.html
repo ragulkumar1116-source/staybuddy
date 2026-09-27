@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StayBuddy - Affordable Stays. Trusted People. Better Connections.</title>
+  
+  <!-- Bootstrap 5 CSS & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Dynamic Header / Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <div class="container-fluid px-0">
+      <a class="navbar-brand d-flex align-items-center gap-2 site-logo-container" href="index.html">
+        <img src="" alt="StayBuddy" class="site-logo-img d-none" style="max-height: 40px; max-width: 180px; object-fit: contain;">
+        <i class="bi bi-house-heart-fill text-primary fs-3 site-logo-fallback-icon"></i>
+        <span class="fw-bold fs-4 site-name text-dark">StayBuddy</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+          <li class="nav-item nav-menu-home"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item nav-menu-findStay"><a class="nav-link" href="app.html#findStay">Find Stay</a></li>
+          <li class="nav-item nav-menu-becomeHost"><a class="nav-link" href="host.html">Become Host</a></li>
+          <li class="nav-item nav-menu-friends"><a class="nav-link" href="app.html#friends">Friends</a></li>
+          <li class="nav-item nav-menu-matching"><a class="nav-link" href="app.html#matching">Matching</a></li>
+          <li class="nav-item nav-menu-safety"><a class="nav-link" href="#safety">Safety</a></li>
+          <li class="nav-item nav-menu-about"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item nav-menu-contact"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <div class="d-flex gap-2">
+          <a href="auth.html" class="btn btn-outline-primary fw-bold px-3">Log In</a>
+          <a href="auth.html#register" class="btn btn-primary fw-bold px-3">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Banner -->
+  <section id="home" class="container mt-4">
+    <div id="homeHeroBanner" class="hero-banner text-center text-lg-start p-5">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <span class="badge bg-light text-primary fw-bold px-3 py-2 rounded-pill mb-3">
+            <i class="bi bi-patch-check-fill me-1"></i> 100% Peer Verified Network
+          </span>
+          <h1 id="homeHeroTitle" class="display-4 fw-extrabold mb-3">Find Budget Stays with Verified Peers</h1>
+          <p id="homeHeroSubtitle" class="lead mb-4 text-light opacity-90">
+            Connect with friendly hosts, share spaces safely, and save money while building authentic social connections.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <a id="homeHeroBtn1" href="app.html#findStay" class="btn btn-light text-primary btn-lg fw-bold px-4">Find a Stay</a>
+            <a id="homeHeroBtn2" href="host.html" class="btn btn-outline-light btn-lg fw-bold px-4">Become a Host</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Pillars & Features -->
+  <section class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Why Choose StayBuddy?</h2>
+      <p class="text-muted">Built on STAY + TRUST + FRIENDS + SAFETY for students & young professionals.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 p-4 border-0 shadow-sm text-center card-hover">
+          <div class="user-avatar user-avatar-lg mx-auto mb-3">
+            <i class="bi bi-shield-check fs-2"></i>
+          </div>
+          <h4 id="feat1Title" class="fw-bold">Verified Profiles</h4>
+          <p id="feat1Desc" class="text-secondary small mb-0">Peer-to-peer verification and community trust badges ensure maximum safety.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 p-4 border-0 shadow-sm text-center card-hover">
+          <div class="user-avatar user-avatar-lg mx-auto mb-3" style="background: linear-gradient(135deg, #20c997, #0d6efd);">
+            <i class="bi bi-wallet2 fs-2"></i>
+          </div>
+          <h4 id="feat2Title" class="fw-bold">Affordable Daily Rates</h4>
+          <p id="feat2Desc" class="text-secondary small mb-0">Informational pricing starting at ₹250/day directly settled between guest and host.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 p-4 border-0 shadow-sm text-center card-hover">
+          <div class="user-avatar user-avatar-lg mx-auto mb-3" style="background: linear-gradient(135deg, #ffc107, #fd7e14);">
+            <i class="bi bi-people-fill fs-2"></i>
+          </div>
+          <h4 id="feat3Title" class="fw-bold">Social Matching</h4>
+          <p id="feat3Desc" class="text-secondary small mb-0">Find room hosts or guests who share your hobbies, languages, and lifestyle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About & Safety Preview Section -->
+  <section id="about" class="bg-white py-5 border-top border-bottom">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <img id="aboutImg" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80" class="img-fluid rounded-4 shadow-md" alt="Community">
+        </div>
+        <div class="col-lg-6">
+          <span class="badge bg-primary-subtle text-primary fw-bold mb-2">ABOUT STAYBUDDY</span>
+          <h2 id="aboutTitle" class="fw-bold mb-3">Empowering Student & Professional Mobility</h2>
+          <p id="aboutSubtitle" class="lead text-primary fw-semibold mb-3">Say goodbye to expensive deposits and isolated stays.</p>
+          <p id="aboutDesc" class="text-secondary mb-4">
+            StayBuddy was founded to eliminate exorbitant rent deposits and isolated stay experiences. We empower verified students and professionals to share spaces, cut living costs, and build meaningful friendships.
+          </p>
+          <div class="d-flex gap-3">
+            <a href="auth.html#register" class="btn btn-primary fw-bold">Join Community</a>
+            <a href="legal.html" class="btn btn-outline-secondary fw-bold">Read Safety Policy</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safety & Emergency SOS Highlight -->
+  <section id="safety" class="container py-5">
+    <div class="card bg-danger text-white p-5 border-0 rounded-4 shadow-lg">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <span class="badge bg-white text-danger fw-bold mb-2 px-3 py-2">SAFETY FIRST</span>
+          <h2 id="safetyTitle" class="display-6 fw-bold mb-3">Integrated 1-Tap SOS System</h2>
+          <p id="safetySubtitle" class="lead mb-4 opacity-90">Instant alert dispatch to Master Admin and emergency helplines for complete peace of mind.</p>
+          <div id="safetyRules" class="bg-white text-dark p-3 rounded-3 small mb-3">
+            1. Always verify peer identity before check-in.<br>
+            2. Keep all communications inside StayBuddy chat.<br>
+            3. Utilize our 1-Tap SOS Emergency button during urgent situations.
+          </div>
+        </div>
+        <div class="col-lg-4 text-center">
+          <i class="bi bi-shield-fill-exclamation display-1 text-white mb-3"></i>
+          <div>
+            <a href="legal.html#safety" class="btn btn-light text-danger btn-lg fw-bold">View Safety Protocol</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & FAQ Section -->
+  <section id="contact" class="container py-5">
+    <div class="row g-5">
+      <div class="col-md-6">
+        <h3 class="fw-bold mb-3">Frequently Asked Questions</h3>
+        <div class="accordion" id="faqAccordion">
+          <div class="accordion-item border-0 mb-2 shadow-sm rounded">
+            <h2 class="accordion-header">
+              <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                How is payment handled?
+              </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-secondary small">
+                The stay prices displayed on StayBuddy (e.g. ₹250/day) are informational. Payments are settled directly between guest and host in cash, UPI, or mutual agreement. StayBuddy charges 0 online checkout fees!
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item border-0 mb-2 shadow-sm rounded">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                How does peer matching work?
+              </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-secondary small">
+                Our algorithm matches candidate hosts and guests based on shared interests, city, language compatibility, and social preferences weighted dynamically by Master Admin.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card p-4 border-0 shadow-sm">
+          <h4 class="fw-bold mb-3">Get in Touch</h4>
+          <p class="text-muted small">Have questions or need assistance? Reach out to our 24/7 support team.</p>
+          <div class="mb-3">
+            <i class="bi bi-envelope-fill text-primary me-2"></i> <span class="site-email fw-bold">support@staybuddy.com</span>
+          </div>
+          <div class="mb-3">
+            <i class="bi bi-telephone-fill text-success me-2"></i> <span class="site-phone fw-bold">+91 98765 43210</span>
+          </div>
+          <div class="mb-3">
+            <i class="bi bi-geo-alt-fill text-danger me-2"></i> <span class="site-address">Sector 62, Noida, NCR, India</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-light py-4 border-top mt-auto">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+          <h5 class="fw-bold text-white mb-1 site-name">StayBuddy</h5>
+          <p class="small text-muted mb-0 site-footerText">Verified peer-to-peer budget stays & social connections.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+          <a href="legal.html" class="text-light me-3 small">Terms</a>
+          <a href="legal.html#privacy" class="text-light me-3 small">Privacy</a>
+          <a href="legal.html#safety" class="text-light me-3 small">Safety</a>
+          <a href="admin.html" class="text-muted small"><i class="bi bi-lock-fill"></i> Admin Panel</a>
+        </div>
+      </div>
+      <hr class="my-3 border-secondary">
+      <div class="text-center small text-muted site-copyright">
+        © 2026 StayBuddy Technologies Inc. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Firebase & App Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script src="assets/js/firebase.js"></script>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/content.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "staybuddy",
+  "version": "1.0.0",
+  "description": "StayBuddy - Verified peer-to-peer budget stay and social connection platform",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "deploy": "firebase deploy"
+  },
+  "dependencies": {
+    "firebase": "^10.8.0"
+  },
+  "author": "StayBuddy Team",
+  "license": "MIT"
+}

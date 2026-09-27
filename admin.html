@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StayBuddy - Master Admin Panel</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+
+  <!-- Admin Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="px-3 mb-4">
+      <a href="admin.html" class="d-flex align-items-center gap-2 text-white text-decoration-none">
+        <i class="bi bi-shield-lock-fill text-primary fs-3"></i>
+        <span class="fw-bold fs-5">Master Admin</span>
+      </a>
+    </div>
+
+    <div class="nav flex-column">
+      <a class="nav-link admin-nav-link active" data-section="dashboard" href="#dashboard"><i class="bi bi-speedometer2"></i> Dashboard Overview</a>
+      <a class="nav-link admin-nav-link" data-section="websiteEditor" href="#websiteEditor"><i class="bi bi-pencil-square"></i> Company Branding & Copy</a>
+      <a class="nav-link admin-nav-link" data-section="themeEditor" href="#themeEditor"><i class="bi bi-palette-fill"></i> Design & Theme Editor</a>
+      <a class="nav-link admin-nav-link" data-section="imageManager" href="#imageManager"><i class="bi bi-image"></i> Image URL Manager</a>
+      <a class="nav-link admin-nav-link" data-section="users" href="#users"><i class="bi bi-people-fill"></i> User Management</a>
+      <a class="nav-link admin-nav-link" data-section="stays" href="#stays"><i class="bi bi-house-door-fill"></i> Stay Management</a>
+      <a class="nav-link admin-nav-link" data-section="bookings" href="#bookings"><i class="bi bi-journal-check"></i> Bookings Audit</a>
+      <a class="nav-link admin-nav-link" data-section="matching" href="#matching"><i class="bi bi-sliders"></i> Matching Weights</a>
+      <a class="nav-link admin-nav-link" data-section="sos" href="#sos"><i class="bi bi-shield-fill-exclamation text-danger"></i> SOS Center</a>
+      <a class="nav-link admin-nav-link" data-section="features" href="#features"><i class="bi bi-toggle-on"></i> Feature Flags & Menus</a>
+      <a class="nav-link admin-nav-link" data-section="firebaseConfig" href="#firebaseConfig"><i class="bi bi-cloud-fill text-info"></i> Firebase Server Config</a>
+      <a class="nav-link admin-nav-link" data-section="websiteReset" href="#websiteReset"><i class="bi bi-arrow-counterclockwise text-warning"></i> Website Reset</a>
+      <a class="nav-link admin-nav-link" data-section="logs" href="#logs"><i class="bi bi-list-stars"></i> Admin Audit Logs</a>
+    </div>
+
+    <hr class="border-secondary mx-3 my-4">
+    <div class="px-3">
+      <button onclick="logoutUser()" class="btn btn-outline-danger btn-sm w-100 fw-bold"><i class="bi bi-box-arrow-right me-1"></i> Exit Admin</button>
+    </div>
+  </aside>
+
+  <!-- Admin Header & Main Content -->
+  <header class="admin-header d-flex justify-content-between align-items-center">
+    <h5 class="fw-bold mb-0">Platform Governance & CMS Control</h5>
+    <div class="d-flex align-items-center gap-3">
+      <span class="badge bg-danger p-2"><i class="bi bi-shield-check me-1"></i> Master Admin Mode</span>
+      <span class="fw-bold small text-dark admin-display-name">Admin</span>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    
+    <!-- SECTION 1: Dashboard Overview -->
+    <div id="admin-section-dashboard" class="admin-section">
+      <div class="row g-3 mb-4">
+        <div class="col-md-3">
+          <div class="card admin-card p-3">
+            <small class="text-muted text-uppercase fw-bold">Total Users</small>
+            <h2 id="statTotalUsers" class="fw-extrabold text-primary mb-0">0</h2>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card admin-card p-3">
+            <small class="text-muted text-uppercase fw-bold">Listed Stays</small>
+            <h2 id="statTotalStays" class="fw-extrabold text-success mb-0">0</h2>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card admin-card p-3">
+            <small class="text-muted text-uppercase fw-bold">Total Bookings</small>
+            <h2 id="statTotalBookings" class="fw-extrabold text-info mb-0">0</h2>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card admin-card p-3 border-danger border-2">
+            <small class="text-danger text-uppercase fw-bold">Active SOS Alerts</small>
+            <h2 id="statActiveSos" class="fw-extrabold text-danger mb-0">0</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="card admin-card p-4">
+        <h5 class="fw-bold mb-3">Quick Governance Control</h5>
+        <p class="text-secondary small">As Master Admin, you have authority to edit website text, theme colors, image URLs, feature flags, matching weights, and resolve SOS emergencies.</p>
+      </div>
+    </div>
+
+    <!-- SECTION 2: Website Content & Branding Editor -->
+    <div id="admin-section-websiteEditor" class="admin-section d-none">
+      <div class="card admin-card p-4">
+        <h4 class="fw-bold mb-3"><i class="bi bi-pencil-square text-primary me-2"></i> Company Branding & Page Copy Editor</h4>
+        <form id="websiteEditorForm">
+          <div class="row g-3">
+            <h5 class="fw-bold text-dark border-bottom pb-2 mb-2"><i class="bi bi-building text-primary me-2"></i> Company Identity & Logo Settings</h5>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Company / Website Name</label>
+              <input type="text" id="editSiteName" class="form-control" placeholder="StayBuddy" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Company Tagline</label>
+              <input type="text" id="editSiteTagline" class="form-control" placeholder="Affordable Stays. Trusted People. Better Connections.">
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-bold">Company Logo Image URL</label>
+              <input type="text" id="editLogoUrl" class="form-control" placeholder="https://example.com/logo.png or image URL">
+              <small class="text-muted">Enter any image URL. It will instantly replace the default logo across all pages!</small>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label fw-bold">Contact Email</label>
+              <input type="email" id="editContactEmail" class="form-control" placeholder="support@staybuddy.com">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label fw-bold">Contact Phone</label>
+              <input type="text" id="editContactPhone" class="form-control" placeholder="+91 98765 43210">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label fw-bold">Contact Address</label>
+              <input type="text" id="editContactAddress" class="form-control" placeholder="Tech Hub, Sector 62, Noida, NCR">
+            </div>
+
+            <h5 class="fw-bold text-dark border-bottom pb-2 mt-4 mb-2"><i class="bi bi-layout-text-window-reverse text-primary me-2"></i> Homepage Hero & Copy Editor</h5>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Homepage Hero Title</label>
+              <input type="text" id="editPageTitle" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Homepage Subtitle</label>
+              <input type="text" id="editPageSubtitle" class="form-control">
+            </div>
+
+            <div class="col-md-3">
+              <label class="form-label fw-bold">Button 1 Text</label>
+              <input type="text" id="editBtn1Text" class="form-control">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label fw-bold">Button 1 Link</label>
+              <input type="text" id="editBtn1Link" class="form-control">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label fw-bold">Button 2 Text</label>
+              <input type="text" id="editBtn2Text" class="form-control">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label fw-bold">Button 2 Link</label>
+              <input type="text" id="editBtn2Link" class="form-control">
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Feature 1 Title</label>
+              <input type="text" id="editFeat1Title" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Feature 1 Description</label>
+              <input type="text" id="editFeat1Desc" class="form-control">
+            </div>
+
+            <div class="col-12 mt-4">
+              <button type="submit" class="btn btn-primary fw-bold px-4">Save Changes</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- SECTION 3: Design & Theme Editor -->
+    <div id="admin-section-themeEditor" class="admin-section d-none">
+      <div class="card admin-card p-4">
+        <h4 class="fw-bold mb-3"><i class="bi bi-palette-fill text-primary me-2"></i> Dynamic Theme & Color Editor</h4>
+        <form id="themeEditorForm">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label fw-bold">Primary Color</label>
+              <input type="color" id="themePrimary" class="form-control form-control-color w-100" value="#0d6efd">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label fw-bold">Secondary Color</label>
+              <input type="color" id="themeSecondary" class="form-control form-control-color w-100" value="#212529">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label fw-bold">Accent Color</label>
+              <input type="color" id="themeAccent" class="form-control form-control-color w-100" value="#20c997">
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Background Color</label>
+              <input type="color" id="themeBg" class="form-control form-control-color w-100" value="#f8f9fa">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Text Color</label>
+              <input type="color" id="themeText" class="form-control form-control-color w-100" value="#212529">
+            </div>
+
+            <div class="col-12 mt-4">
+              <button type="submit" class="btn btn-primary fw-bold px-4">Apply Theme Live</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- SECTION 4: Image URL Manager -->
+    <div id="admin-section-imageManager" class="admin-section d-none">
+      <div class="card admin-card p-4">
+        <h4 class="fw-bold mb-3"><i class="bi bi-image text-primary me-2"></i> External Image URL Manager</h4>
+        <form id="imageManagerForm">
+          <div class="mb-3">
+            <label class="form-label fw-bold">Site Logo Image URL</label>
+            <input type="text" id="imgLogoUrl" class="form-control" placeholder="https://example.com/logo.png or image URL">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Homepage Banner Image URL</label>
+            <input type="text" id="imgBannerUrl" class="form-control" placeholder="https://images.unsplash.com/...">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">About Page Image URL</label>
+            <input type="text" id="imgAboutUrl" class="form-control" placeholder="https://images.unsplash.com/...">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Safety Page Image URL</label>
+            <input type="text" id="imgSafetyUrl" class="form-control" placeholder="https://images.unsplash.com/...">
+          </div>
+
+          <button type="submit" class="btn btn-primary fw-bold px-4">Save Image URLs</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- SECTION 5: User Management -->
+    <div id="admin-section-users" class="admin-section d-none">
+      <div class="card admin-card p-4">
+        <h4 class="fw-bold mb-3"><i class="bi bi-people-fill text-primary me-2"></i> User Directory & Roles</h4>
+        <div class="table-responsive">
+          <table class="table align-middle table-admin">
+            <thead>
+              <tr>
+                <th>User Details</th>
+                <th>Role</th>
+                <th>City</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 6: Stay Management -->
+    <div id="admin-section-stays" class="admin-section d-none">
+      <div class="card admin-card p-4">
+        <h4 class="fw-bold mb-3"><i class="bi bi-house-door-fill text-primary me-2"></i> Stay Listings Moderation</h4>
+        <div class="table-responsive">
+          <table class="table align-middle table-admin">
+            <thead>
+              <tr>
+                <th>Listing Title</th>
+                <th>Host</th>
+                <th>Room Type</th>
+                <th>Price/Day</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="staysTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 7: Bookings Audit -->
+    <div id="admin-section-bookings" class="admin-section d-none">
+      <div class="card admin-card p-4">
+        <h4 class="fw-bold mb-3"><i class="bi bi-journal-check text-primary me-2"></i> Bookings Audit Log</h4>
+        <div class="table-responsive">
+          <table class="table align-middle table-admin">
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>Guest</th>
+                <th>Host</th>
+                <th>Dates</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="bookingsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 8: Matching Weights Configurator -->
+    <div id="admin-section-matching" class="admin-section d-none">
+      <div class="card admin-card p-4">
+        <h4 class="fw-bold mb-2"><i class="bi bi-sliders text-primary me-2"></i> Social Matching Weights Algorithm</h4>
+        <p class="text-muted small mb-4">Total weights must sum to exactly 100%.</p>
+
+        <form id="matchingWeightsForm">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label fw-bold">Common Interests (%)</label>
+              <input type="number" id="weightInterests" class="form-control" value="40" min="0" max="100">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label fw-bold">Same City (%)</label>
+              <input type="number" id="weightCity" class="form-control" value="20" min="0" max="100">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label fw-bold">Languages (%)</label>
+              <input type="number" id="weightLanguages" class="form-control" value="15" min="0" max="100">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Age Compatibility (%)</label>
+              <input type="number" id="weightAge" class="form-control" value="15" min="0" max="100">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Social Preferences (%)</label>
+              <input type="number" id="weightSocial" class="form-control" value="10" min="0" max="100">
+            </div>
+
+            <div class="col-12 mt-4">
+              <button type="submit" class="btn btn-primary fw-bold px-4">Save Algorithm Weights</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- SECTION 9: SOS Center -->
+    <div id="admin-section-sos" class="admin-section d-none">
+      <div class="card admin-card p-4 border-danger border-2">
+        <h4 class="fw-bold text-danger mb-3"><i class="bi bi-shield-fill-exclamation me-2"></i> Emergency SOS Alert Center</h4>
+        <div id="sosAlertsContainer"></div>
+      </div>
+    </div>
+
+    <!-- SECTION 10: Feature Flags & Menus -->
+    <div id="admin-section-features" class="admin-section d-none">
+      <div class="card admin-card p-4">
+        <h4 class="fw-bold mb-4"><i class="bi bi-toggle-on text-primary me-2"></i> Feature Flags & Navigation Controls</h4>
+        <div class="row g-4">
+          <div class="col-md-6">
+            <h6 class="fw-bold border-bottom pb-2">Platform Features</h6>
+            <div class="form-check form-switch mb-3">
+              <input class="form-check-input feature-flag-toggle" type="checkbox" data-flag="userRegistration" checked>
+              <label class="form-check-label fw-bold">User Registration</label>
+            </div>
+            <div class="form-check form-switch mb-3">
+              <input class="form-check-input feature-flag-toggle" type="checkbox" data-flag="hostRegistration" checked>
+              <label class="form-check-label fw-bold">Host Registration</label>
+            </div>
+            <div class="form-check form-switch mb-3">
+              <input class="form-check-input feature-flag-toggle" type="checkbox" data-flag="stayRequests" checked>
+              <label class="form-check-label fw-bold">Stay Requests</label>
+            </div>
+            <div class="form-check form-switch mb-3">
+              <input class="form-check-input feature-flag-toggle" type="checkbox" data-flag="chat" checked>
+              <label class="form-check-label fw-bold">Peer Chat</label>
+            </div>
+            <div class="form-check form-switch mb-3">
+              <input class="form-check-input feature-flag-toggle" type="checkbox" data-flag="sos" checked>
+              <label class="form-check-label fw-bold">SOS Emergency System</label>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <h6 class="fw-bold border-bottom pb-2">Public Menu Visibility</h6>
+            <div class="form-check form-switch mb-3">
+              <input class="form-check-input menu-toggle" type="checkbox" data-menu="findStay" checked>
+              <label class="form-check-label fw-bold">Find Stay Menu</label>
+            </div>
+            <div class="form-check form-switch mb-3">
+              <input class="form-check-input menu-toggle" type="checkbox" data-menu="becomeHost" checked>
+              <label class="form-check-label fw-bold">Become Host Menu</label>
+            </div>
+            <div class="form-check form-switch mb-3">
+              <input class="form-check-input menu-toggle" type="checkbox" data-menu="friends" checked>
+              <label class="form-check-label fw-bold">Friends Menu</label>
+            </div>
+            <div class="form-check form-switch mb-3">
+              <input class="form-check-input menu-toggle" type="checkbox" data-menu="matching" checked>
+              <label class="form-check-label fw-bold">Matching Menu</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: Firebase Realtime Database Server Config -->
+    <div id="admin-section-firebaseConfig" class="admin-section d-none">
+      <div class="card admin-card p-4 border-info border-2">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="fw-bold mb-0 text-dark"><i class="bi bi-cloud-fill text-info me-2"></i> Firebase Realtime Database Server Credentials</h4>
+          <span class="badge bg-success p-2"><i class="bi bi-check-circle-fill me-1"></i> Realtime DB Engine</span>
+        </div>
+        <p class="text-secondary small mb-4">Enter your Firebase Console project keys below to connect directly to your live cloud Realtime Database. All registrations, stays, bookings, messages, and settings will store directly on the cloud server.</p>
+
+        <form id="firebaseConfigForm">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label fw-bold">API Key (apiKey)</label>
+              <input type="text" id="fbApiKey" class="form-control" placeholder="AIzaSy..." required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Auth Domain (authDomain)</label>
+              <input type="text" id="fbAuthDomain" class="form-control" placeholder="your-project.firebaseapp.com" required>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Database URL (databaseURL)</label>
+              <input type="url" id="fbDatabaseUrl" class="form-control" placeholder="https://your-project-default-rtdb.firebaseio.com" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Project ID (projectId)</label>
+              <input type="text" id="fbProjectId" class="form-control" placeholder="your-project-id" required>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label fw-bold">Storage Bucket</label>
+              <input type="text" id="fbStorageBucket" class="form-control" placeholder="your-project.appspot.com">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label fw-bold">Messaging Sender ID</label>
+              <input type="text" id="fbMessagingSenderId" class="form-control" placeholder="123456789">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label fw-bold">App ID</label>
+              <input type="text" id="fbAppId" class="form-control" placeholder="1:12345:web:abc">
+            </div>
+
+            <div class="col-12 mt-4">
+              <button type="submit" class="btn btn-info text-white fw-bold px-4">
+                <i class="bi bi-cloud-upload-fill me-1"></i> Save & Connect Firebase Realtime Database Server
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- SECTION 11: Website Reset System -->
+    <div id="admin-section-websiteReset" class="admin-section d-none">
+      <div class="card admin-card p-4 border-warning border-2">
+        <h4 class="fw-bold text-warning mb-2"><i class="bi bi-exclamation-triangle-fill me-2"></i> Reset Website Configuration</h4>
+        <p class="text-secondary small mb-4">This operation will restore platform text copy, colors, menus, image URLs, and settings back to default system presets. <strong>User accounts, stays, bookings and reports will NOT be deleted.</strong></p>
+        
+        <div>
+          <button onclick="confirmResetWebsite()" class="btn btn-warning fw-bold px-4">
+            <i class="bi bi-arrow-counterclockwise me-1"></i> RESET WEBSITE CONFIGURATION
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 12: Admin Audit Logs -->
+    <div id="admin-section-logs" class="admin-section d-none">
+      <div class="card admin-card p-4">
+        <h4 class="fw-bold mb-3"><i class="bi bi-list-stars text-primary me-2"></i> Master Admin Audit Logs</h4>
+        <div class="table-responsive">
+          <table class="table align-middle table-admin">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Admin</th>
+                <th>Action</th>
+                <th>Target</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody id="adminLogsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script src="assets/js/firebase.js"></script>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>
